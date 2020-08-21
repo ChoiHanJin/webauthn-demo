@@ -168,7 +168,17 @@ iptime 관리 페이지에서 `고급 설정 - NAT/라우터 관리 - 포트포�
 4. `/client/angular.json` 파일 수정  
 `/client/angular.json` 파일의 `["project"]["app"]["architect"]["serve"]["option"]`에 `"ssl": true, "sslKey": "./ssl/privkey.pem", "sslCert": "./ssl/fullchain.pem"`을 추가한다.
 
-5. 클라이언트 구동  
+5. `/server/src/main/resources/application.properties` 파일 수정  
+`/server/src/main/resources/application.properties` 파일의 14 ~ 17번 라인을 다음과 같이 수정한다.
+```
+app.relying-party-id=[your host name]
+app.relying-party-name=Example Application
+app.relying-party-icon=https://[your host name]/assets/logo.png
+app.relying-party-origins=https://[your host name]
+```
+`[your host name]`은 DDNS를 설정한 호스트 이름이다.
+
+6. 클라이언트 구동  
 SSL 인증서를 발급받고 클라이언트를 구동할 때는 `/client` 디렉토리에서 `$ sudo ionic serve --external --ssl`을 입력하여 클라이언트를 구동한다.
 
 위 2가지 방법을 이용할 때 클라이언트를 구동하면 disable host error가 발생한다. 이를 피하기 위해 `/client/angular.json` 파일의 `["project"]["app"]["architect"]["serve"]["option"]`에 `"disableHostCheck": true`를 추가한다.  
